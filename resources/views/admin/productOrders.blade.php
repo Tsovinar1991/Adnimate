@@ -131,11 +131,13 @@
     </style>
 @endsection
 
+
+
+@section('page', 'Delivery Management')
+
+
 @section('content')
-    <div class="container-fluid">
 
-
-        <h5>DELIVERY ORDER MANAGEMENT</h5>
         <h5 class="heading">New orders</h5>
         <h5 class="noOrders">There are no new orders</h5>
         <div id="new">
@@ -253,9 +255,6 @@
         </audio>
         @endif
 
-
-    </div>
-    <!-- /.container-fluid -->
 @endsection
 
 @section('js')

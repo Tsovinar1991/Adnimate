@@ -60,13 +60,6 @@ Route::post('/create_order', 'GetOrdersController@store');
 
 
 
-// Usage In admin part
-//Route::get('/about', 'AdminAboutUsController@index');
-//Route::get('/about/{id}', 'AdminAboutUsController@show');
-//Route::post('/about', 'AdminAboutUsController@store');
-//Route::put('/about/{id}', 'AdminAboutUsController@update');
-//Route::delete('/about/{id}', 'AdminAboutUsController@delete');
-
 
 
 

@@ -76,9 +76,11 @@
 
 @endsection
 
+
+@section('page', 'About Us')
+
 @section('content')
-    <div class="container-fluid">
-        <h5>ABOUT US</h5>
+
         <div class="create"><a class="btn btn-success" href="{{url('admin/about/create')}}">Create</a></div>
 
         @if(isset($about) && count($about)>0)
@@ -150,9 +152,6 @@
             <h5>No About Data Yet</h5>
         @endif
 
-
-    </div>
-    <!-- /.container-fluid -->
 @endsection
 
 @section('js')

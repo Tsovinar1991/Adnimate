@@ -9,6 +9,11 @@ use App\About;
 class AdminAboutUsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * @param $offset
      * @param $limit
@@ -17,14 +22,14 @@ class AdminAboutUsController extends Controller
     public function index(Request $request)
     {
         $about = About::paginate(6);
-        return view('admin.aboutUs')->with('about',$about);
+        return view('admin.about.aboutUs')->with('about',$about);
 
     }
 
 
     public function create()
     {
-        return view('admin.aboutCreate');
+        return view('admin.about.aboutCreate');
     }
 
 
@@ -87,7 +92,7 @@ class AdminAboutUsController extends Controller
     public function edit($id){
         $about = About::find($id);
         if(!$about){ return view('admin.404');}
-        return view('admin.aboutUpdate')->with('about', $about);
+        return view('admin.about.aboutUpdate')->with('about', $about);
 
     }
 

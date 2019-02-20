@@ -30,12 +30,22 @@ Route::prefix('admin')->group(function () {
     Route::get('/setStatus', 'AdminDeliveryController@setStatus');
     Route::get('/test', 'AdminDeliveryController@test');
 
+
+      //About routes
     Route::get('/insert/aboutUs', 'AdminAboutUsController@index');
     Route::get('/about/create', 'AdminAboutUsController@create');
     Route::delete('/about/{id}', 'AdminAboutUsController@delete');
     Route::post('/about', 'AdminAboutUsController@store');
     Route::get('/about/{id}/edit', 'AdminAboutUsController@edit');
     Route::put('/about/{id}', 'AdminAboutUsController@update');
+
+
+    //Product routes
+    Route::get('/insert/products', 'AdminProductController@index');
+
+
+
+
 
     // Password reset routes
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');

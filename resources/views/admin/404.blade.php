@@ -5,16 +5,10 @@
 
 @endsection
 
-@section('content')
-    <div class="container-fluid">
+@section('page', '404 Error')
 
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">404 Error</li>
-        </ol>
+@section('content')
+
 
         <!-- Page Content -->
         <h1 class="display-1">404</h1>
@@ -24,8 +18,6 @@
             <a href="{{url('admin')}}">return home</a>.</p>
 
 
-    </div>
-    <!-- /.container-fluid -->
 @endsection
 
 @section('js')
