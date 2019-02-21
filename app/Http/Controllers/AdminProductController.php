@@ -14,8 +14,11 @@ class AdminProductController extends Controller
     }
 
     public function index(){
+        $products = RestaurantMenu::sortable()->paginate(5);
+      return view('admin.product.products', compact('products'));
+    }
 
-        $products = RestaurantMenu::paginate(6);
-      return view('admin.product.products')->with('products', $products);
+    public function create(){
+        return view('admin.product.productCreate');
     }
 }

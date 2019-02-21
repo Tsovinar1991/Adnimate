@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function () {
 
     //Product routes
     Route::get('/insert/products', 'AdminProductController@index');
+    Route::get('/product/create', 'AdminProductController@create');
 
 
 
