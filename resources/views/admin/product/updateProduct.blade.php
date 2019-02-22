@@ -9,13 +9,13 @@
 
 @section('content')
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ action('AdminProductController@store')}}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" action="{{url('admin/product/'.$product->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
-
+        <input name="_method" type="hidden" value="PUT">
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">Name</label>
             <div class="col-md-10">
-                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required
+                <input id="name" type="text" class="form-control" name="name" value="{{$product->name}}" required
                        autofocus>
                 @if ($errors->has('name'))
                     <span class="help-block text-danger">
@@ -29,7 +29,7 @@
             <label for="description" class="col-md-4 control-label">Description</label>
             <div class="col-md-10">
                 <input id="description" type="text" class="form-control" name="description"
-                       value="{{ old('description') }}" required autofocus>
+                       value="{{ $product->description }}" required autofocus>
                 @if ($errors->has('description'))
                     <span class="help-block text-danger">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -54,7 +54,7 @@
             <label for="parent_id" class="col-md-4 control-label">Category</label>
             <div class="col-md-10">
                 <select name="parent_id" id="parent_id" class="form-control">
-                    <option selected="true" value="{{0}}">No Category</option>
+                    <option selected="true" value="{{$product->parent_id}}">{{$product->name}}</option>
 
                     @foreach($parents as $k=> $p)
                         <option value='{{$p->id}}'>{{$p->name}}</option>
@@ -74,6 +74,7 @@
             <div class="col-md-10">
                 <select name="restaurant_id" id="restaurant_id" class="form-control">
                     <option selected="true" disabled="disabled">Choose Restaurant</option>
+
                     @foreach($restaurants as $k=>$r)
                         <option value="{{$r->id}}">{{$r->name}}</option>
                     @endforeach
@@ -90,7 +91,7 @@
         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
             <label for="price" class="col-md-4 control-label">Price</label>
             <div class="col-md-10">
-                <input id="price" type="number" class="form-control" name="price" value="{{ old('price') }}" required
+                <input id="price" type="number" class="form-control" name="price" value="{{$product->price}}" required
                        autofocus>
                 @if ($errors->has('price'))
                     <span class="help-block text-danger">
@@ -104,7 +105,8 @@
         <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
             <label for="weight" class="col-md-4 control-label">Weight</label>
             <div class="col-md-10">
-                <input id="weight" type="text" class="form-control" name="weight" value="{{ old('weight') }}" required
+                <input id="weight" type="text" class="form-control" name="weight" value="{{ $product->weight }}"
+                       required
                        autofocus>
                 @if ($errors->has('weight'))
                     <span class="help-block text-danger">
@@ -119,8 +121,12 @@
             <label for="status" class="col-md-4 control-label">Status</label>
             <div class="col-md-10">
                 <select name="status" id="status" class="form-control">
-                    <option value="1">1</option>
-                    <option value="0">0</option>
+                    <option value="{{$product->status}}">{{$product->status}}</option>
+                    @if($product->status === 0)
+                        <option value="1">1</option>
+                    @else
+                        <option value="0">0</option>
+                    @endif
                 </select>
                 @if ($errors->has('status'))
                     <span class="help-block text-danger">

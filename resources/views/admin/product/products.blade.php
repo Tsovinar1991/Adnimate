@@ -67,6 +67,8 @@
         }
 
 
+
+
     </style>
 @endsection
 
@@ -106,7 +108,7 @@
                         <td>{{$p->restaurant_id}}</td>
                         <td>{{$p->parent_id}}</td>
                         <td>
-                            <a href=""> <span class="btn btn-warning"><i
+                            <a href="{{url('/admin/product/'.$p->id.'/edit')}}"> <span class="btn btn-primary"><i
                                             class="fas fa-pen"></i> Edit</span></a>
 
                             <form action="" method="POST">

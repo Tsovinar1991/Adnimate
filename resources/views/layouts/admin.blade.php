@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin </title>
+    <title>Admin</title>
 
     <!-- Bootstrap core CSS-->
     <link href="{{asset("items/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
@@ -25,6 +25,17 @@
     <link href="{{asset("css/sb-admin.css")}}" rel="stylesheet">
 
     @yield('css')
+
+    <style>
+       #wrapper a.nav-link:hover i:before {
+            color: #65a9c3;
+        }
+
+        #wrapper a.nav-link i:before {
+            color: #167888;
+        }
+
+    </style>
 
 </head>
 
@@ -106,6 +117,8 @@
                 <span>Dashboard</span>
             </a>
         </li>
+
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
@@ -113,10 +126,8 @@
                 <span>Insert Data</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <h6 class="dropdown-header">Pages:</h6>
-                <a class="dropdown-item" href="{{url('/admin/insert/aboutUs')}}"> <i class="fas fa-users-cog"></i> About
-                    Us</a>
-                <a class="dropdown-item" href="{{url('/admin/insert/products')}}"><i class="fas fa-apple-alt"></i>
+                <h6 class="dropdown-header">Table</h6>
+                <a class="dropdown-item" href="{{url('/admin/insert/products')}}"><i class="fas fa-apple-alt" ></i>
                     Products</a>
                 {{--<a class="dropdown-item" href="register.html">Register</a>--}}
                 {{--<a class="dropdown-item" href="forgot-password.html">Forgot Password</a>--}}
@@ -126,6 +137,29 @@
                 {{--<a class="dropdown-item" href="blank.html">Blank Page</a>--}}
             </div>
         </li>
+
+        {{--dinamic--}}
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-book-reader"></i>
+                <span>Menu</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <h6 class="dropdown-header">Pages</h6>
+                <a class="dropdown-item" href="{{url('/admin/pages')}}"><i class="fa fa-book-open"></i> All Pages</a>
+                @foreach(App\Page::all() as $p)
+                    <a class="dropdown-item" href="/admin/page/{{$p->id}}"><i class="fas fa-users-cog"></i> {{$p->name_en}}</a>
+                @endforeach
+            </div>
+        </li>
+
+
+        {{--dinamic--}}
+
+
         <li class="nav-item">
             <a class="nav-link" href="{{url('admin/productOrders')}}">
                 <i class="fas fa-utensils"></i>

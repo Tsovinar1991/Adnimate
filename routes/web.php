@@ -25,27 +25,36 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
+
+
+    //delivery routes
     Route::get('/productOrders', 'AdminDeliveryController@orders')->name('admin.product_orders');
     Route::get('/getNewOrders', 'AdminDeliveryController@getNewOrders');
     Route::get('/setStatus', 'AdminDeliveryController@setStatus');
     Route::get('/test', 'AdminDeliveryController@test');
 
 
-      //About routes
-    Route::get('/insert/aboutUs', 'AdminAboutUsController@index');
-    Route::get('/about/create', 'AdminAboutUsController@create');
-    Route::delete('/about/{id}', 'AdminAboutUsController@delete');
-    Route::post('/about', 'AdminAboutUsController@store');
-    Route::get('/about/{id}/edit', 'AdminAboutUsController@edit');
-    Route::put('/about/{id}', 'AdminAboutUsController@update');
-
 
     //Product routes
     Route::get('/insert/products', 'AdminProductController@index');
     Route::get('/product/create', 'AdminProductController@create');
+    Route::post('/product', 'AdminProductController@store');
+    Route::get('/product/{id}/edit', 'AdminProductController@edit');
+    Route::put('/product/{id}', 'AdminProductController@update');
 
 
 
+
+    //Page routes
+    Route::get('/page/{p}', 'AdminCreatePageController@index');
+    Route::get('/pages/create', 'AdminCreatePageController@create');
+    Route::get('/pages', 'AdminCreatePageController@all');
+    Route::get('/page/{p}/edit', 'AdminCreatePageController@edit');
+    Route::post('/pages', 'AdminCreatePageController@store');
+    Route::put('/page/{id}', 'AdminCreatePageController@update');
+    Route::delete('/page/{id}', 'AdminCreatePageController@delete');
+    Route::delete('/pages/delete', 'AdminCreatePageController@truncate');
 
 
     // Password reset routes
