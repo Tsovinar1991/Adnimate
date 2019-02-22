@@ -5,7 +5,7 @@
 @endsection
 
 
-@section('page', 'Product Create')
+@section('page', 'Product Update')
 
 @section('content')
 

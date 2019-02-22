@@ -8,6 +8,14 @@ use Validator;
 
 class AdminCreatePageController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+
     public function index(Request $request, $p)
     {
         $page = Page::where('id', $p)->first();
@@ -52,7 +60,7 @@ class AdminCreatePageController extends Controller
         $page = Page::create($request->all());
 
         if ($page) {
-            return redirect(url('admin/page/'. $page->id));
+            return redirect(url('admin/page/'. $page->id))->with('success', "Created Successfully");;
         }
 
     }
@@ -94,7 +102,7 @@ class AdminCreatePageController extends Controller
 
 
         $page->update($request->all());
-        return redirect(url('admin/page/' . $page->id));
+        return redirect(url('admin/page/' . $page->id))->with('success', "Updated Successfully");
     }
 
 

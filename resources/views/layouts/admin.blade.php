@@ -184,7 +184,7 @@
                 <li class="breadcrumb-item active">@yield('page')</li>
             </ol>
 
-
+            @include('include.messages')
             @yield('content')
 
 

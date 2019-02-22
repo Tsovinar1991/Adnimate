@@ -74,7 +74,15 @@
 
 @section('page', 'Products')
 
+
+
+
+
+
+
 @section('content')
+
+
     <div class="create"><a class="btn btn-success" href="{{url('admin/product/create')}}">Create</a></div>
 
 
@@ -111,7 +119,7 @@
                             <a href="{{url('/admin/product/'.$p->id.'/edit')}}"> <span class="btn btn-primary"><i
                                             class="fas fa-pen"></i> Edit</span></a>
 
-                            <form action="" method="POST">
+                            <form action="{{url('admin/product/'. $p->id)}}" method="POST">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>

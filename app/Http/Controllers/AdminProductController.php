@@ -14,21 +14,24 @@ class AdminProductController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index(){
+    public function index()
+    {
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
-      return view('admin.product.products', compact('products'));
+        return view('admin.product.products', compact('products'));
     }
 
-    public function create(){
-        $restaurants = Restaurant::select('id','name')->get();
+    public function create()
+    {
+        $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name')->where('parent_id', '0')->get();
 //        echo "<pre>";
 //        var_dump($restaurant);
 //        die();
-        return view('admin.product.productCreate', compact(['restaurants','parents']));
+        return view('admin.product.productCreate', compact(['restaurants', 'parents']));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         if ($request->hasFile('avatar')) {
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
@@ -40,7 +43,6 @@ class AdminProductController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //Upload Image
             $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
-
 
 
         } else {
@@ -76,22 +78,24 @@ class AdminProductController extends Controller
             ]
         );
 
-        if($product){
-            return redirect(url('admin/insert/products'));
+        if ($product) {
+            return redirect(url('admin/insert/products'))->with('success', "Created Successfully");
         }
 
 
     }
 
-    public function edit($id){
-        $restaurants = Restaurant::select('id','name')->get();
+    public function edit($id)
+    {
+        $restaurants = Restaurant::select('id', 'name')->get();
         $parents = RestaurantMenu::select('id', 'name')->where('parent_id', '0')->get();
         $product = RestaurantMenu::find($id);
-        return view('admin.product.updateProduct', compact(['product', 'restaurants','parents']));
+        return view('admin.product.updateProduct', compact(['product', 'restaurants', 'parents']));
     }
 
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         if ($request->hasFile('avatar')) {
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
@@ -105,12 +109,9 @@ class AdminProductController extends Controller
             $path = $request->file('avatar')->storeAs('public', $fileNameToStore);
 
 
-
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
-
-
 
 
         $product = RestaurantMenu::find($id);
@@ -134,27 +135,34 @@ class AdminProductController extends Controller
         }
 
 
-
 //        echo "<pre>";
 //        var_dump($request->all());
 //        die();
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
-            'avatar' => $fileNameToStore ,
+            'avatar' => $fileNameToStore,
             'parent_id' => $request->parent_id,
             'restaurant_id' => $request->restaurant_id,
             'price' => $request->price,
             'weight' => $request->weight
 
         ]);
-        return redirect(url('admin/insert/products'));
-        
-        
-        
+        return redirect(url('admin/insert/products'))->with('success', "Updated Successfully");
+
     }
 
 
+    public function delete($id)
+    {
+        $product = RestaurantMenu::find($id);
+        $delete = $product->delete();
 
 
+        return redirect(url('admin/insert/products'))->with('success','Deleted Successfully');
+
+
+
+
+    }
 }

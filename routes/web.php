@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/product', 'AdminProductController@store');
     Route::get('/product/{id}/edit', 'AdminProductController@edit');
     Route::put('/product/{id}', 'AdminProductController@update');
+    Route::delete('/product/{id}', 'AdminProductController@delete');
 
 
 
