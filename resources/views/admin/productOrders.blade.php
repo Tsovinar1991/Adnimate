@@ -139,7 +139,7 @@
 @section('content')
 
         <h5 class="heading">New orders</h5>
-        <h5 class="noOrders">There are no new orders</h5>
+        <p class="noOrders alert alert-info">There are no new orders.</p>
         <div id="new">
             <table class="no-footer" width="100%">
                 <thead>
@@ -462,7 +462,10 @@
                 });
             }
             else{
-                $(".access").css("background-color", "#587086 ")
+                $('.access').prop('disabled', true);
+                $(".access").css("background-color", "#587086");
+                $("#old").hide();
+
             }
         });
     </script>
