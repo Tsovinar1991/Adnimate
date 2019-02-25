@@ -28,7 +28,7 @@ class AdminDeliveryController extends Controller
                 ->get();
             $order_list[$o['id']] = $orderItem;
         }
-        return view("admin.productOrders", compact('order', 'order_list'));
+        return view("admin.delivery.productOrders", compact('order', 'order_list'));
     }
 
     public function getNewOrders(Request $request)

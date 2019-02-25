@@ -20,7 +20,7 @@
             <a class="dropdown-item" href="{{url('/admin/insert/products')}}"><i class="fas fa-coffee"></i>
                 Products</a>
             {{--<div class="dropdown-divider"></div>--}}
-            <a class="dropdown-item" href=""><i class="far fa-image"></i>
+            <a class="dropdown-item" href=""><i class="fas fa-image"></i>
                 Restaurant Images</a>
 
 
@@ -45,7 +45,8 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Pages</h6>
             <a class="dropdown-item" href="{{url('/admin/pages')}}">
-                <i class="fa fa-book-open"></i>
+                {{--<i class="fa fa-book-open"></i>--}}
+                <i class="fas fa-th-list"></i>
                 All Pages</a>
             @foreach(App\Page::all() as $p)
                 <a class="dropdown-item" href="/admin/page/{{$p->id}}"><i
