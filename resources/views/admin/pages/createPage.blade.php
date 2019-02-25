@@ -5,6 +5,9 @@
     <style>
 
         .hidden{display:none;}
+        iframe{
+            min-height: 200px;
+        }
 
     </style>
 
@@ -101,7 +104,7 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-outline-success">
                     Submit
                 </button>
             </div>

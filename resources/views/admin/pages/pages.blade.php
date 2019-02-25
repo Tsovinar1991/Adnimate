@@ -70,7 +70,9 @@
             width: 100px;
         }
 
-
+        .create {
+            padding-bottom: 20px;
+        }
     </style>
 
 
@@ -81,16 +83,15 @@
 
 @section('content')
 
-    <div class="create "  style="margin-left:15px ;">
-        <div class="row">
-        <a class="btn btn-success" href="{{url('admin/pages/create')}}">Create</a>
-        <form action="{{url('admin/pages/delete')}}" method="POST">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button class="btn btn-danger">Truncate</button>
-        </form>
+
+        <div class="create">
+        <a class="btn btn-outline-success" href="{{url('admin/pages/create')}}">Create</a>
+        {{--<form action="{{url('admin/pages/delete')}}" method="POST">--}}
+            {{--{{ method_field('DELETE') }}--}}
+            {{--{{ csrf_field() }}--}}
+            {{--<button class="btn btn-danger">Truncate</button>--}}
+        {{--</form>--}}
         </div>
-    </div>
 
 
     @if(isset($pages) && count($pages)>0)

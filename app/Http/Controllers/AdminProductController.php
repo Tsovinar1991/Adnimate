@@ -23,7 +23,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name')->where('parent_id', '0')->get();
+        $parents = RestaurantMenu::select('id', 'name')->get();
 //        echo "<pre>";
 //        var_dump($restaurant);
 //        die();
@@ -55,7 +55,7 @@ class AdminProductController extends Controller
             'avatar' => 'required',
             'parent_id' => 'required|numeric',
             'restaurant_id' => 'required|numeric',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'weight' => 'required'
 
         ]);
@@ -79,7 +79,7 @@ class AdminProductController extends Controller
         );
 
         if ($product) {
-            return redirect(url('admin/insert/products'))->with('success', "Created Successfully");
+            return redirect(url('admin/insert/products'))->with('success', "Product Created Successfully");
         }
 
 
@@ -88,14 +88,29 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $restaurants = Restaurant::select('id', 'name')->get();
-        $parents = RestaurantMenu::select('id', 'name')->where('parent_id', '0')->get();
+        $parents = RestaurantMenu::select('id', 'name')->get();
         $product = RestaurantMenu::find($id);
-        return view('admin.product.updateProduct', compact(['product', 'restaurants', 'parents']));
+        $restaurant_id = $product->restaurant_id;
+        $restaurantName = Restaurant::where('id', $restaurant_id)->get(['name'])->first();
+        $r_name = $restaurantName->name;
+
+        if (!$product) {
+            return view('admin.404');
+        }
+        return view('admin.product.updateProduct', compact(['product', 'restaurants', 'parents', 'r_name']));
     }
 
 
     public function update(Request $request, $id)
     {
+
+        $product = RestaurantMenu::find($id);
+        $product_image = $product->avatar;
+
+        if ($product == null) {
+            return view('admin.404');
+        }
+
 
         if ($request->hasFile('avatar')) {
             $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
@@ -114,18 +129,13 @@ class AdminProductController extends Controller
         }
 
 
-        $product = RestaurantMenu::find($id);
-        if ($product == null) {
-            return view('admin.404');
-        }
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
-            'avatar' => 'required',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'parent_id' => 'required|numeric',
             'restaurant_id' => 'required|numeric',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'weight' => 'required'
         ]);
 
@@ -148,7 +158,11 @@ class AdminProductController extends Controller
             'weight' => $request->weight
 
         ]);
-        return redirect(url('admin/insert/products'))->with('success', "Updated Successfully");
+
+        if(!$request->avatar){
+            $product->update(['avatar' => $product_image]);
+        }
+        return redirect(url('admin/insert/products'))->with('success', "Product Updated Successfully");
 
     }
 
@@ -159,9 +173,7 @@ class AdminProductController extends Controller
         $delete = $product->delete();
 
 
-        return redirect(url('admin/insert/products'))->with('success','Deleted Successfully');
-
-
+        return redirect(url('admin/insert/products'))->with('success', 'Product Deleted Successfully');
 
 
     }

@@ -9,7 +9,14 @@
 
 @section('content')
 
-    <form class="form-horizontal" role="form" method="POST" action="{{url('admin/product/'.$product->id)}}" enctype="multipart/form-data">
+    <div class="alert alert-info" role="alert">
+        The fields you don`t want to change, don`t edit.
+    </div>
+
+
+
+    <form class="form-horizontal" role="form" method="POST" action="{{url('admin/product/'.$product->id)}}"
+          enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PUT">
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -39,23 +46,26 @@
         </div>
 
         <div class="form-group">
-            <div>
-                <label for="avatar" class="col-md-1 control-label">Avatar</label>
+
+            <label for="avatar" class="col-md-4 control-label">Avatar</label>
+            <div class="col-md-10">
                 <input id="avatar" type="file" name="avatar">
-            </div>
-            @if ($errors->has('avatar'))
-                <span class="help-block text-danger">
+
+                @if ($errors->has('avatar'))
+                    <span class="help-block text-danger">
                                         <strong>{{ $errors->first('avatar') }}</strong>
                                     </span>
-            @endif
+                @endif
+            </div>
         </div>
 
         <div class="form-group{{ $errors->has('parent_id') ? ' has-error' : '' }}">
             <label for="parent_id" class="col-md-4 control-label">Category</label>
             <div class="col-md-10">
                 <select name="parent_id" id="parent_id" class="form-control">
-                    <option selected="true" value="{{$product->parent_id}}">{{$product->name}}</option>
 
+                    <option selected="true" value="{{$product->parent_id}}">{{$product->name}}</option>
+                    <option value="{{0}}">No Category</option>
                     @foreach($parents as $k=> $p)
                         <option value='{{$p->id}}'>{{$p->name}}</option>
                     @endforeach
@@ -76,7 +86,13 @@
                     <option selected="true" disabled="disabled">Choose Restaurant</option>
 
                     @foreach($restaurants as $k=>$r)
-                        <option value="{{$r->id}}">{{$r->name}}</option>
+                        @if($r->name === $r_name && $r->id === $product->restaurant_id)
+                            <option value="{{$r->id}}" selected>{{$r->name}}</option>
+                        @else
+                            <option value="{{$r->id}}">{{$r->name}}</option>
+                        @endif
+
+
                     @endforeach
                 </select>
                 @if ($errors->has('restaurant_id'))
@@ -139,7 +155,7 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-outline-success">
                     Submit
                 </button>
             </div>

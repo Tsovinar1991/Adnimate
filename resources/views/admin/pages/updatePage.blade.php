@@ -10,6 +10,10 @@
     .hidden {
         display: none;
     }
+
+    iframe{
+        min-height: 200px;
+    }
 </style>
 
 @endsection
@@ -17,6 +21,9 @@
 @section('page', 'Page Edit')
 
 @section('content')
+    <div class="alert alert-info" role="alert">
+        The fields you don`t want to change, don`t edit.
+    </div>
 
 <form class="form-horizontal" role="form" method="POST" action="{{url('admin/page/'.$pages->id)}}" enctype="multipart/form-data">
     {{ csrf_field() }}
@@ -108,7 +115,7 @@
 
     <div class="form-group">
         <div class="col-md-6 col-md-offset-4">
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class=" btn btn-outline-success">
                 Submit
             </button>
         </div>

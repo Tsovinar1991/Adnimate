@@ -83,7 +83,7 @@
 @section('content')
 
 
-    <div class="create"><a class="btn btn-success" href="{{url('admin/product/create')}}">Create</a></div>
+    <div class="create"><a class="btn btn-outline-success" href="{{url('admin/product/create')}}">Create</a></div>
 
 
     @if(isset($products) && count($products)>0)

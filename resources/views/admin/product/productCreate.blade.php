@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('css')
+    <style>
+        .file strong  {
+            margin-left: 14px !important;
+
+        }
+    </style>
 
 @endsection
 
@@ -39,15 +45,15 @@
         </div>
 
         <div class="form-group">
-            <div>
-                <label for="avatar" class="col-md-1 control-label">Avatar</label>
+                <label for="avatar" class="col-md-4 control-label">Avatar</label>
+            <div class="col-md-10">
                 <input id="avatar" type="file" name="avatar">
-            </div>
-            @if ($errors->has('avatar'))
-                <span class="help-block text-danger">
+                @if ($errors->has('avatar'))
+                    <span class="help-block text-danger file">
                                         <strong>{{ $errors->first('avatar') }}</strong>
                                     </span>
-            @endif
+                @endif
+            </div>
         </div>
 
         <div class="form-group{{ $errors->has('parent_id') ? ' has-error' : '' }}">
@@ -73,7 +79,7 @@
             <label for="restaurant_id" class="col-md-4 control-label">Restaurant Id</label>
             <div class="col-md-10">
                 <select name="restaurant_id" id="restaurant_id" class="form-control">
-                    <option selected="true" disabled="disabled">Choose Restaurant</option>
+                    {{--<option selected="true" disabled="disabled">Choose Restaurant</option>--}}
                     @foreach($restaurants as $k=>$r)
                         <option value="{{$r->id}}">{{$r->name}}</option>
                     @endforeach
@@ -133,7 +139,7 @@
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-outline-success">
                     Submit
                 </button>
             </div>
