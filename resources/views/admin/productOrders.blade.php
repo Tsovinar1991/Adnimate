@@ -159,9 +159,10 @@
             </table>
         </div>
         <div>
-            <button type="button" class="btn btn-info access">Access To Other Orders</button>
+            <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
         </div>
-        <div id="old" style="display:none;">
+        {{--<div id="old" style="display:none;">--}}
+        <div id="old">
             <h5 class="heading_old">Other Orders</h5>
             @if(isset($order))
                 <table class="no-footer" width="100%">

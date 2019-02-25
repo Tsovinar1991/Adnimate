@@ -52,7 +52,7 @@ class AdminProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
-            'avatar' => 'required',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'parent_id' => 'required|numeric',
             'restaurant_id' => 'required|numeric',
             'price' => 'required|numeric',
