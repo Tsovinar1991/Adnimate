@@ -137,7 +137,9 @@
         </div>
 
     @else
-        <h2>No Product Yet</h2>
+        <div class="alert alert-info col-md-12" role="alert">
+            No product yet.
+        </div>
     @endif
 
 @endsection

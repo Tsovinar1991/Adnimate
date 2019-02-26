@@ -25,90 +25,30 @@
     <link href="{{asset("css/sb-admin.css")}}" rel="stylesheet">
 
     @yield('css')
-
-    <style>
-        #wrapper a.nav-link:hover i:before {
-            color: #65a9c3;
-        }
-
-        #wrapper a.nav-link i:before {
-            color: #167888;
-        }
-
-    </style>
-
 </head>
 
 <body id="page-top">
 
-@include('include.navbar')
+@include('admin.include.navbar')
 
 <div id="wrapper">
-    @include('include.sidebar')
+    @include('admin.include.sidebar')
     <div id="content-wrapper">
         <div class="container-fluid">
-
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{url('admin')}}">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">@yield('page')</li>
-            </ol>
-
-            @include('include.messages')
+            @include('admin.include.breadcrumb')
+            @include('admin.include.messages')
             @yield('content')
-
-
         </div>
         <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © SHINE 2018</span>
-                </div>
-            </div>
-        </footer>
-
+        @include('admin.include.footer')
     </div>
     <!-- /.content-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+@include('admin.include.scroll_to_top')
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">Logout</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('admin.include.log_out_modal')
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('items/jquery/jquery.min.js')}}"></script>

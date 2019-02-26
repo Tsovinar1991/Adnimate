@@ -49,7 +49,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   right: 15px;
   bottom: 15px;
   display: none;
-  width: 50px;
+  width: 30px;
   height: 50px;
   text-align: center;
   color: #fff;
@@ -252,6 +252,27 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   -webkit-transform: rotate(15deg);
   transform: rotate(15deg);
 }
+
+
+
+
+
+/*custom*/
+#wrapper a.nav-link:hover i:before {
+  color: #65a9c3;
+}
+
+#wrapper a.nav-link i:before {
+  color: #167888;
+}
+
+/*custom*/
+
+
+
+
+
+
 
 @media (min-width: 576px) {
   .card-columns {

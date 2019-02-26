@@ -46,6 +46,16 @@ Route::prefix('admin')->group(function () {
 
 
 
+    //restaurant image routes
+    Route::get('/insert/images', 'AdminRestaurantImageController@all');
+    Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create');
+    Route::post('/restaurant_image', 'AdminRestaurantImageController@store');
+    Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit');
+    Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update');
+    Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete');
+
+
+
 
     //Page routes
     Route::get('/page/{p}', 'AdminCreatePageController@index');

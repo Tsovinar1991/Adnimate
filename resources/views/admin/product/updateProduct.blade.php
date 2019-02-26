@@ -91,8 +91,6 @@
                         @else
                             <option value="{{$r->id}}">{{$r->name}}</option>
                         @endif
-
-
                     @endforeach
                 </select>
                 @if ($errors->has('restaurant_id'))

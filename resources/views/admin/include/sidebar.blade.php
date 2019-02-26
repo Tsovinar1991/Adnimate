@@ -20,7 +20,7 @@
             <a class="dropdown-item" href="{{url('/admin/insert/products')}}"><i class="fas fa-coffee"></i>
                 Products</a>
             {{--<div class="dropdown-divider"></div>--}}
-            <a class="dropdown-item" href=""><i class="fas fa-image"></i>
+            <a class="dropdown-item" href="{{url('/admin/insert/images')}}"><i class="fas fa-image"></i>
                 Restaurant Images</a>
 
 

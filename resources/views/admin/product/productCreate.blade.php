@@ -47,7 +47,7 @@
         <div class="form-group">
                 <label for="avatar" class="col-md-4 control-label">Avatar</label>
             <div class="col-md-10">
-                <input id="avatar" type="file" name="avatar">
+                <input id="avatar" type="file" name="avatar" required>
                 @if ($errors->has('avatar'))
                     <span class="help-block text-danger file">
                                         <strong>{{ $errors->first('avatar') }}</strong>
