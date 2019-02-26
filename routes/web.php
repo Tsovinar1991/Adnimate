@@ -27,13 +27,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
-
     //delivery routes
     Route::get('/productOrders', 'AdminDeliveryController@orders')->name('admin.product_orders');
     Route::get('/getNewOrders', 'AdminDeliveryController@getNewOrders');
     Route::get('/setStatus', 'AdminDeliveryController@setStatus');
     Route::get('/test', 'AdminDeliveryController@test');
-
 
 
     //Product routes
@@ -45,7 +43,6 @@ Route::prefix('admin')->group(function () {
     Route::delete('/product/{id}', 'AdminProductController@delete');
 
 
-
     //restaurant image routes
     Route::get('/insert/images', 'AdminRestaurantImageController@all');
     Route::get('/restaurant_image/create', 'AdminRestaurantImageController@create');
@@ -53,8 +50,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/restaurant_image/{id}/edit', 'AdminRestaurantImageController@edit');
     Route::put('/restaurant_image/{id}', 'AdminRestaurantImageController@update');
     Route::delete('/restaurant_image/{id}', 'AdminRestaurantImageController@delete');
-
-
 
 
     //Page routes
@@ -74,3 +69,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });
+
+Route::get('/contact_us', 'ContactMailController@index');
+Route::post('contact_us', ['as' => 'contact.store', 'uses' => 'ContactMailController@store']);
+
+
+
