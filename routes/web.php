@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
-    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
 
     //delivery routes
@@ -61,6 +61,17 @@ Route::prefix('admin')->group(function () {
     Route::put('/page/{id}', 'AdminCreatePageController@update');
     Route::delete('/page/{id}', 'AdminCreatePageController@delete');
     Route::delete('/pages/delete', 'AdminCreatePageController@truncate');
+
+
+    //mail message notification
+    Route::get('/read_message', 'AdminController@read_message');
+    Route::post('/clear_messages', 'AdminController@clear_messages');
+
+
+    //user setting routes
+    Route::get('/register_user', 'AdminUserController@registerForm');
+
+
 
 
     // Password reset routes

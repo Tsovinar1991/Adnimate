@@ -257,23 +257,6 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 
 
 
-/*custom*/
-#wrapper a.nav-link:hover i:before {
-  color: #65a9c3;
-}
-
-#wrapper a.nav-link i:before {
-  color: #167888;
-}
-
-/*custom*/
-
-
-
-
-
-
-
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 1;

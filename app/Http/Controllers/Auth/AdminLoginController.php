@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminLoginController extends Controller
 {
@@ -38,7 +39,12 @@ class AdminLoginController extends Controller
 
     public function logout()
     {
+        $contact_id = Session::get('contact_id');
         Auth::guard('admin')->logout();
+        session()->put('contact_id', $contact_id);
         return redirect('/');
+
+
+
     }
 }

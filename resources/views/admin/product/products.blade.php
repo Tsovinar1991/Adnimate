@@ -1,11 +1,6 @@
 @extends('layouts.admin')
 @section('css')
     <style>
-
-        body {
-            user-select: none;
-        }
-
         .important th {
             background-color: #d9d9d9 !important;
             font-weight: bold !important;

@@ -23,6 +23,7 @@
     <!-- Custom styles for this template-->
 
     <link href="{{asset("css/sb-admin.css")}}" rel="stylesheet">
+    <link href="{{asset("css/shine.css")}}" rel="stylesheet">
 
     @yield('css')
 </head>

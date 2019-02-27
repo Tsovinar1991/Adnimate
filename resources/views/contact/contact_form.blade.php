@@ -7,19 +7,22 @@
 <style>
     label {
         color: white;
+        font-style:italic;
     }
 </style>
 <body style="background-image: url({{asset('images/background.png')}})">
 <div class="container">
-    <h1 style="color:white;">Contact US</h1>
+
 
     <div class="col-md-6">
+        <h1 style="color:white; text-align:center;font-style:italic;">Contact </h1>
         @if(Session::has('success'))
             <div class="alert alert-success">
                 {{ Session::get('success') }}
             </div>
         @endif
-        {!! Form::open(['route'=>'contact.store']) !!}
+        {!! Form::open(['route'=>'contact.store', 'method'=> 'POST',  'enctype'=>'multipart/form-data' ]) !!}
+            {{ csrf_field() }}
         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
             {!! Form::label('Name:') !!}
             {!! Form::text('name', old('name'), ['class'=>'form-control', 'placeholder'=>'Enter Name']) !!}
@@ -40,6 +43,11 @@
         </div>
         {!! Form::close() !!}
     </div>
+    {{--@if(Session::has('contact_id'))--}}
+        {{--<div class="alert alert-danger">--}}
+            {{--{{ Session::get('contact_id')}}--}}
+        {{--</div>--}}
+    {{--@endif--}}
 </div>
 </body>
 </html>

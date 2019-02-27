@@ -14,8 +14,10 @@ class AdminProductController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
+
         $products = RestaurantMenu::sortable()->orderBy('id', 'DESC')->paginate(5);
         return view('admin.product.products', compact('products'));
     }

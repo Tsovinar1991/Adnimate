@@ -2,9 +2,6 @@
 
 @section('css')
     <style>
-        body {
-            user-select: none;
-        }
 
         #pages tr td {
             padding: 5px 25px;

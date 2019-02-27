@@ -4,101 +4,6 @@
     <style>
         @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
 
-        body {
-            user-select: none;
-        }
-
-        .new:hover {
-            /*background-color: #0081C9;*/
-        }
-
-        .mytable {
-            border-collapse: collapse;
-        }
-
-        .mytable .order_show {
-            cursor: pointer;
-        }
-
-        .mytable thead {
-            padding: 4px !important;
-        }
-
-        .ordered_products thead th, .ordered_products tbody td {
-            text-align: center;
-        }
-
-        .ordered_products {
-            display: none;
-        }
-
-        .ordered_products table {
-            border: 3px solid #587086;
-            margin-left: 10%;
-            background-color: #e8e6e6;
-            padding: 5px;
-            width: 80%;
-        }
-
-        .ordered_products thead th {
-            padding: 10px;
-            border-bottom: 2px solid #587086;
-            background-color: #587086 !important;
-            color: white !important;
-        }
-
-        .ordered_products tbody td {
-            padding: 10px;
-        }
-
-        .order_show i {
-            color: greenyellow;
-        }
-
-        .order-other-show i {
-            color: greenyellow;
-        }
-
-        .important th {
-            background-color: #d9d9d9 !important;
-            font-weight: bold !important;
-            color: #224143 !important;
-            font-size: 14px;
-        }
-
-        .important:first-child th:first-child {
-            border-top-left-radius: 10px !important;
-        }
-
-        .important:first-child th:last-child {
-            border-top-right-radius: 10px !important;
-        }
-
-        .important th {
-            padding-top: 10px !important;
-            padding-bottom: 10px !important;
-            padding-right: 10px !important;
-        }
-
-        #eye {
-            border-right: 6px solid #587086 !important;
-        }
-
-        #new,
-        .heading,
-        .noOrders {
-            display: none;
-        }
-
-        .access {
-            margin: 25px;
-        }
-
-        .prod {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
         td {
             color: #3e5164;
         }
@@ -124,9 +29,8 @@
         select option[value="confirmed"] {
             background: #5ac16f !important;
         }
-        .pagination li{
-            padding:5px 10px !important;
-        }
+
+
 
     </style>
 @endsection
@@ -138,123 +42,123 @@
 
 @section('content')
 
-        <h5 class="heading">New orders</h5>
-        <p class="noOrders alert alert-info">There are no new orders.</p>
-        <div id="new">
+    <h5 class="heading">New orders</h5>
+    <p class="noOrders alert alert-info">There are no new orders.</p>
+    <div id="new">
+        <table class="no-footer" width="100%">
+            <thead>
+            <tr class="important">
+                <th id="eye"></th>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PHONE</th>
+                <th>ADDRESS</th>
+                <th>TOTAL</th>
+                <th>CREATED AT</th>
+                <th>STATUS</th>
+            </tr>
+            </thead>
+            <tbody id="cont" class="test">
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
+    </div>
+    {{--<div id="old" style="display:none;">--}}
+    <div id="old">
+        <h5 class="heading_old">Other Orders</h5>
+        @if(isset($order))
             <table class="no-footer" width="100%">
                 <thead>
                 <tr class="important">
-                    <th id="eye"></th>
+                    <th></th>
                     <th>ID</th>
                     <th>NAME</th>
                     <th>PHONE</th>
                     <th>ADDRESS</th>
                     <th>TOTAL</th>
                     <th>CREATED AT</th>
-                    <th>STATUS</th>
+                    <th>CHANGE STATUS</th>
                 </tr>
                 </thead>
-                <tbody id="cont" class="test">
+                <tbody id="old_cont">
+                @foreach($order as $o)
+                    {{--order part--}}
+                    <tr data-id={{$o->id}}>
+                        <td class="order-other-show"><i class="fa fa-plus fa-lg"></i></td>
+                        <td>{{$o->id}}</td>
+                        <td>{{$o->name}}</td>
+                        <td>{{$o->telephone}}</td>
+                        <td>{{$o->address}}</td>
+                        <td>{{$o->total}} AMD</td>
+                        <td>{{$o->created_at}}</td>
+                        <td>
+                            <select class='form-control change_status' id="{{$o->id}}">
+                                <option selected="true" disabled="disabled">Change Status</option>
+                                <option value="in progress"{{$o->status =="in progress"?"selected":""}}>in progress
+                                </option>
+                                <option value="canceled" {{$o->status=="canceled"?"selected":""}}>canceled</option>
+                                <option value="confirmed" {{$o->status=="confirmed"?"selected":""}}>confirmed
+                                </option>
+                            </select>
+                        <td>
+                    </tr>
+                    {{--product part--}}
+                    <tr id='product-other-info-{{$o->id}}' class="ordered_products">
+                        <td colspan="12">
+                            <div>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Product Id</th>
+                                        <th>Product Avatar</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>Product Count</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach ($order_list as $key => $products)
+                                        @foreach( $products as $prod)
+                                            @if($o->id === $key)
+
+                                                <tr class="prod">
+                                                    <td>{{$prod['id']}}</td>
+                                                    <td>
+                                                        <div style="margin-top:5px;">
+                                                            <img src="/storage/{{$prod['avatar']}}"
+                                                                 style="width:150px;height:auto;">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{$prod['name']}}</td>
+                                                    <td>{{$prod['price']}} AMD</td>
+                                                    <td>{{$prod['count']}}</td>
+                                                    <td>{{$prod['total']}} AMD</td>
+                                                </tr>
+
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+
+                @endforeach
                 </tbody>
             </table>
-        </div>
-        <div>
-            <button type="button" class="btn btn-outline-info access">Close/Open Other Orders</button>
-        </div>
-        {{--<div id="old" style="display:none;">--}}
-        <div id="old">
-            <h5 class="heading_old">Other Orders</h5>
-            @if(isset($order))
-                <table class="no-footer" width="100%">
-                    <thead>
-                    <tr class="important">
-                        <th></th>
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>PHONE</th>
-                        <th>ADDRESS</th>
-                        <th>TOTAL</th>
-                        <th>CREATED AT</th>
-                        <th>CHANGE STATUS</th>
-                    </tr>
-                    </thead>
-                    <tbody id="old_cont">
-                    @foreach($order as $o)
-                        {{--order part--}}
-                        <tr data-id={{$o->id}}>
-                            <td class="order-other-show"><i class="fa fa-plus fa-lg"></i></td>
-                            <td>{{$o->id}}</td>
-                            <td>{{$o->name}}</td>
-                            <td>{{$o->telephone}}</td>
-                            <td>{{$o->address}}</td>
-                            <td>{{$o->total}} AMD</td>
-                            <td>{{$o->created_at}}</td>
-                            <td>
-                                <select class='form-control change_status' id="{{$o->id}}">
-                                    <option selected="true" disabled="disabled">Change Status</option>
-                                    <option value="in progress"{{$o->status =="in progress"?"selected":""}}>in progress
-                                    </option>
-                                    <option value="canceled" {{$o->status=="canceled"?"selected":""}}>canceled</option>
-                                    <option value="confirmed" {{$o->status=="confirmed"?"selected":""}}>confirmed
-                                    </option>
-                                </select>
-                            <td>
-                        </tr>
-                        {{--product part--}}
-                        <tr id='product-other-info-{{$o->id}}' class="ordered_products">
-                            <td colspan="12">
-                                <div>
-                                    <table>
-                                        <thead>
-                                        <tr>
-                                            <th>Product Id</th>
-                                            <th>Product Avatar</th>
-                                            <th>Product Name</th>
-                                            <th>Product Price</th>
-                                            <th>Product Count</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+            <div>{{$order->links()}}</div>
+    </div>
 
-                                        @foreach ($order_list as $key => $products)
-                                            @foreach( $products as $prod)
-                                                @if($o->id === $key)
-
-                                                    <tr class="prod">
-                                                        <td>{{$prod['id']}}</td>
-                                                        <td>
-                                                            <div style="margin-top:5px;">
-                                                                <img src="/storage/{{$prod['avatar']}}"
-                                                                     style="width:150px;height:auto;">
-                                                            </div>
-                                                        </td>
-                                                        <td>{{$prod['name']}}</td>
-                                                        <td>{{$prod['price']}} AMD</td>
-                                                        <td>{{$prod['count']}}</td>
-                                                        <td>{{$prod['total']}} AMD</td>
-                                                    </tr>
-
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-
-                    @endforeach
-                    </tbody>
-                </table>
-                <div>{{$order->links()}}</div>
-        </div>
-
-        <audio id="pop" preload="auto">
-            <source src="{{asset('audio/sound.mp3')}}" type="audio/mpeg">
-        </audio>
-        @endif
+    <audio id="pop" preload="auto">
+        <source src="{{asset('audio/sound.mp3')}}" type="audio/mpeg">
+    </audio>
+    @endif
 
 @endsection
 
@@ -461,7 +365,7 @@
                     $("#old").fadeToggle(200);
                 });
             }
-            else{
+            else {
                 $('.access').prop('disabled', true);
                 $(".access").css("background-color", "#587086");
                 $("#old").hide();

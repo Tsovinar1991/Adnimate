@@ -1,15 +1,6 @@
 @extends('layouts.admin')
 @section('css')
-<style>
-    .difference{
-        border-bottom:1px solid #bbcbb9;
-    }
 
-    .difference p img{
-        width:300px;
-        height:auto;
-    }
-</style>
 @endsection
 
 @section('page', $page->name_en )
